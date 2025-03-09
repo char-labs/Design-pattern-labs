@@ -13,6 +13,22 @@ class FilmingAnalysisScenePolicyCondition: FilmingPolicyCondition {
     override fun analysisAlgorithm(
         filmings: List<Filming>,
     ): String {
+        filmings.forEach{
+            verifyAlgorithmScene(it)
+            verifyAlgorithmFrameUrl(it)
+        }
         return "Scene"
+    }
+
+    private fun verifyAlgorithmScene(it: Filming) {
+        if (it.algorithm != FilmingAlgorithm.SCENE) {
+            throw IllegalArgumentException("Algorithm is not Scene")
+        }
+    }
+
+    private fun verifyAlgorithmFrameUrl(it: Filming) {
+        if (!it.frameUrl.contains(it.algorithm.name.lowercase())) {
+            throw IllegalArgumentException("Frame URL is unmatched Algorithm")
+        }
     }
 }

@@ -14,10 +14,10 @@ class FilmingProcessor(
         val filmings = filmingRepository.findAllById(request.algorithm)
 
         // 전략 패턴 사용
-        routeFilmingAnalysisStrategy(request.algorithm)
+        val analyzedUseAlgorithm = routeFilmingAnalysisStrategy(request.algorithm)
             .analysisAlgorithm(filmings)
 
-        return "${request.algorithm} analysis completed"
+        return "$analyzedUseAlgorithm analysis completed"
     }
 
     // 전략 라우팅
